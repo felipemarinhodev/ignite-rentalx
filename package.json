@@ -1,0 +1,8 @@
+{
+  "name": "rentalx",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/felipemarinhodev/ignite-rentalx.git",
+  "author": "Felipe Marinho <npm@felipemarinho.dev> (https://felipemarinho.dev/)",
+  "license": "MIT"
+}

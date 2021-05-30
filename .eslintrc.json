@@ -57,7 +57,8 @@
           }
         ],
         "import/no-extraneous-dependencies": "off",
-      "prettier/prettier": "error"
+      "prettier/prettier": "error",
+      "array-callback-return": "off"
     },
     "settings": {
         "import/resolver": {

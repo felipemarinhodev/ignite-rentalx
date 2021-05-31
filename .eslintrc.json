@@ -56,7 +56,7 @@
             "alphabetize": { "order": "asc", "ignoreCase": true }
           }
         ],
-        "import/no-extraneous-dependencies": "off",
+      "import/no-extraneous-dependencies": "off",
       "prettier/prettier": "error",
       "array-callback-return": "off"
     },

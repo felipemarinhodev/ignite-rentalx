@@ -69,6 +69,52 @@ yarn add multer
 yarn add @types/multer -D
 ```
 
+### TypeORM
+É o ORM que será utilizado no projeto. É possível consultar sua [documentação aqui](https://typeorm.io).
+Para realizar a instalação use o comando a baixo:
+```bash
+yarn add typeorm reflect-metadata
+```
+- Lembrando que o `reflect-metadata` vai disponibilizar algumas _anotations_ para facilitar o desenvolvimento e por isso o _typeORM_ precisa dele.
+- Após a instalação do `TypeORM` precisamos instalar o _drive_ do banco de dados, nesse projeto vamos utilizar o _Postgre_ para instalar o seu drive execute o comando abaixo:
+```bash
+yarn add pg
+```
+
+Para habilitar o uso dos `decorators` no projeto remova os comentários no arquivo de configuração `tsconfig.json`:
+```json
+{
+	"experimentalDecorators": true,              /* Enables experimental support for ES7 decorators. */
+	"emitDecoratorMetadata": true,               /* Enables experimental support for emitting type metadata for decorators. */
+}
+```
+### Criando o arquivo de conexão com o banco de dados
+Adicione um arquivo `index.ts` no diretório, `src/database`, lá vamos concentrar as configurações para acessar o banco de dados.
+
+adicione o seguinte código para conseguir realizar a conexão:
+```typescript
+import { createConnection } from "typeorm";
+
+createConnection();
+```
+Importe-o no arquivo `server.ts`
+```typescript
+import "./database";
+```
+O typeORM necessita que tenha um arquivo chamado `ormconfig.json` no diretório raiz do projeto, que vai conter as informações para acessar o banco de dados.
+A estrutura inicial do arquivo será:
+```json
+{
+	"type": "postgres",
+	"host": "localhost",
+	"username": "",
+	"password": "",
+	"database": "rentx"
+}
+```
+
+* O arquivo `ormconfig` pode ser de diversas extensões. Para mais informações consulte a [documentação](https://typeorm.io).
+
 ### Debug
 Para configurar o _debug_ da aplicação vá até a parte __Run and Debug__ e clica em `create a launch.json file` e selecione a opção `Node.js` nessa momento vai abrir um arquivo `.json` para edição com o seguinte código já definido.
 ```json

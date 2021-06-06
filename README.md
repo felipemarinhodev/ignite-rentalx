@@ -115,6 +115,9 @@ A estrutura inicial do arquivo será:
 
 * O arquivo `ormconfig` pode ser de diversas extensões. Para mais informações consulte a [documentação](https://typeorm.io).
 
+### TSyringe
+É uma lib que auxilia na injeção das dependencias. Sua documentação pode ser consultada no [link](https://github.com/microsoft/tsyringe).
+
 ### Debug
 Para configurar o _debug_ da aplicação vá até a parte __Run and Debug__ e clica em `create a launch.json file` e selecione a opção `Node.js` nessa momento vai abrir um arquivo `.json` para edição com o seguinte código já definido.
 ```json

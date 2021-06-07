@@ -9,7 +9,6 @@ class CreateUserController {
     const createCategoryUseCase = container.resolve(CreateUserUseCase);
     await createCategoryUseCase.execute({
       name,
-      username,
       email,
       password,
       driver_license,

@@ -26,7 +26,6 @@
 # Cadastro de imagens do carro
 ## Requisitos funcionais(RF)
 * Deve ser possível cadastrar a imagem do carro
-* Deve ser possível listar todos os carros
 ## Requisitos não funcionais(RNF)
 * Utilizar o multer para upload dos arquivos
 ## Regras de negócio(RN)

@@ -1,8 +1,12 @@
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+
 import { Rental } from "@modules/rentals/infra/typeorm/entities/Rental";
 import { AppError } from "@shared/errors/AppError";
 
 import { IRentalsRepository } from "../../repositories/IRentalsRepository";
 
+dayjs.extend(utc);
 interface IRequest {
   user_id: string;
   car_id: string;
@@ -21,8 +25,16 @@ class CreateRentalUseCase {
     car_id,
     expected_return_date,
   }: IRequest): Promise<Rental> {
-    // O aluguel deve ter duração mínima de 24 horas
-    // Não deve ser possível cadastrar um novo alugel caso já exista um aberto para o mesmo usuário
+    const minimumHour = 24;
+
+    const carUnavailable = await this.rentalsRepository.findOpenRentalByCar(
+      car_id
+    );
+
+    if (carUnavailable) {
+      throw new AppError("Car is unavailable");
+    }
+
     const rentalOpenToUser = await this.rentalsRepository.findOpenRentalByUser(
       user_id
     );
@@ -30,13 +42,15 @@ class CreateRentalUseCase {
       throw new AppError("There is a rental in progress for the user!");
     }
 
-    // Não deve ser possível cadastrar um novo alugel caso já exista um aberto para o mesmo carro
-    const carUnavailable = await this.rentalsRepository.findOpenRentalByCar(
-      car_id
-    );
+    const expectedReturnDateFormat = dayjs(expected_return_date)
+      .utc()
+      .local()
+      .format();
+    const dateNow = dayjs().utc().local().format();
+    const compare = dayjs(expectedReturnDateFormat).diff(dateNow, "hours");
 
-    if (carUnavailable) {
-      throw new AppError("Car is unavailable");
+    if (compare < minimumHour) {
+      throw new AppError("Invalid return time!");
     }
 
     const rental = await this.rentalsRepository.create({
